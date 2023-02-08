@@ -1,91 +1,33 @@
 {
   "project_info": {
-    "project_number": "775994460071",
-    "project_id": "minhasortecrashlytics",
-    "storage_bucket": "minhasortecrashlytics.appspot.com"
+    "project_number": "502150379234",
+    "project_id": "wallpaperapp-c9d94",
+    "storage_bucket": "wallpaperapp-c9d94.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:775994460071:android:31b7588e1e2cb495ff5882",
-        "android_client_info": {
-          "package_name": "br.com.cadealista.listinha"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "775994460071-8hrer025407vqv1bhvv4r3i315ai0hrm.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDwk-DvDBIWU0Zqbt49m7qyzbs-s87iXmw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "775994460071-8hrer025407vqv1bhvv4r3i315ai0hrm.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:775994460071:android:ba6480f43aa3adc7ff5882",
+        "mobilesdk_app_id": "1:502150379234:android:24ea3b7914d3ea498610bb",
         "android_client_info": {
           "package_name": "br.com.dhungria.wallpaperapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "775994460071-8hrer025407vqv1bhvv4r3i315ai0hrm.apps.googleusercontent.com",
+          "client_id": "502150379234-75ku4abrar0forg0qgjj2kdit2omupm7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDwk-DvDBIWU0Zqbt49m7qyzbs-s87iXmw"
+          "current_key": "AIzaSyBtc_P4DK_ibux_mZI16KJttz49ltKk3TA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "775994460071-8hrer025407vqv1bhvv4r3i315ai0hrm.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:775994460071:android:200cbea28f90dd15ff5882",
-        "android_client_info": {
-          "package_name": "br.com.minhasortemegasena"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "775994460071-8hrer025407vqv1bhvv4r3i315ai0hrm.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDwk-DvDBIWU0Zqbt49m7qyzbs-s87iXmw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "775994460071-8hrer025407vqv1bhvv4r3i315ai0hrm.apps.googleusercontent.com",
+              "client_id": "502150379234-75ku4abrar0forg0qgjj2kdit2omupm7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

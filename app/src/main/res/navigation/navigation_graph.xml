@@ -10,7 +10,17 @@
         android:name="br.com.dhungria.wallpaperapp.ui.main.MainFragment"
         tools:layout="@layout/fragment_main"
         android:label="fragment_main">
+        <action
+            android:id="@+id/action_fragment_main_to_wallpaper_fragment"
+            app:destination="@+id/wallpaper_fragment"
+           />
+    </fragment>
 
+    <fragment
+        android:id="@+id/wallpaper_fragment"
+        android:name="br.com.dhungria.wallpaperapp.ui.wallpaper.WallpaperFragment"
+        tools:layout="@layout/wallpaper_layout_fragment"
+        android:label="wallpaper_fragment">
     </fragment>
 
 </navigation>

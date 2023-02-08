@@ -1,7 +1,10 @@
 package br.com.dhungria.wallpaperapp.models
 
+import android.os.Parcelable
 import com.google.firebase.Timestamp
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class WallpaperModel(
     val name: String = "",
     val image: String = "",
@@ -10,4 +13,4 @@ data class WallpaperModel(
     val new: Boolean = false,
     val popular: Boolean = false,
     val date: Timestamp? = null
-)
+):Parcelable
