@@ -1,6 +1,5 @@
 package br.com.dhungria.wallpaperapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import br.com.dhungria.wallpaperapp.models.CategoryModel
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import br.com.dhungria.wallpaperapp.repository.FirebaseRepository
-import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,16 +37,22 @@ class MainViewModel @Inject constructor(
 
     private fun loadCategoryData() {
         viewModelScope.launch {
-            FirebaseFirestore.getInstance()
-                .collection("category")
-                .get()
-                .addOnCompleteListener {
+            firebaseRepository.queryCategory().addOnCompleteListener {
                     if (it.isSuccessful && !it.result.isEmpty) {
                         categoryList.value = it.result.toObjects(CategoryModel::class.java)
                     }
                 }
         }
+    }
 
+    fun loadCategoryDataFiltered(){
+        viewModelScope.launch {
+            firebaseRepository.queryCategoryFiltered("name", "Car").addOnCompleteListener {
+                if (it.isSuccessful && !it.result.isEmpty) {
+                    categoryList.value = it.result.toObjects(CategoryModel::class.java)
+                }
+            }
+        }
     }
 
     fun getWallpaperList(): LiveData<List<WallpaperModel>> {

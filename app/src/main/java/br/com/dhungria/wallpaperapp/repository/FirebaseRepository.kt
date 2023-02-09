@@ -23,7 +23,14 @@ class FirebaseRepository @Inject constructor() {
     }
     fun queryCategory(): Task<QuerySnapshot>{
         return firebaseFireStore
-            .collection("Teste")
+            .collection("category")
+            .orderBy("name", Query.Direction.ASCENDING)
+            .get()
+    }
+    fun queryCategoryFiltered(field: String, value: Any): Task<QuerySnapshot>{
+        return firebaseFireStore
+            .collection("category")
+            .whereEqualTo(field, value)
             .get()
     }
 

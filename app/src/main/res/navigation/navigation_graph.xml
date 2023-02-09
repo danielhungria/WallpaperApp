@@ -14,6 +14,9 @@
             android:id="@+id/action_fragment_main_to_wallpaper_fragment"
             app:destination="@+id/wallpaper_fragment"
            />
+        <action
+            android:id="@+id/action_fragment_main_category_to_fragment_wallpaper_category"
+            app:destination="@+id/wallpaper_category_fragment"/>
     </fragment>
 
     <fragment
@@ -21,6 +24,13 @@
         android:name="br.com.dhungria.wallpaperapp.ui.wallpaper.WallpaperFragment"
         tools:layout="@layout/wallpaper_layout_fragment"
         android:label="wallpaper_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/wallpaper_category_fragment"
+        android:name="br.com.dhungria.wallpaperapp.ui.category.WallpaperCategoryFragment"
+        tools:layout="@layout/fragment_category"
+        android:label="wallpaper_category_fragment">
     </fragment>
 
 </navigation>

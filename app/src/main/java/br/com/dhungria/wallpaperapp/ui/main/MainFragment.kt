@@ -1,6 +1,7 @@
 package br.com.dhungria.wallpaperapp.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +28,9 @@ class MainFragment : Fragment() {
     private val mainAdapterPopular = MainAdapterPopular(onClick = {
         findNavController().navigate(R.id.action_fragment_main_to_wallpaper_fragment, bundleOf("IMAGE_TO_SHOW" to it))
     })
-    private val mainAdapterCategories = MainAdapterCategories()
+    private val mainAdapterCategories = MainAdapterCategories(onClick = {
+        findNavController().navigate(R.id.action_fragment_main_category_to_fragment_wallpaper_category)
+    })
 
 
     private fun setupRecyclerViewPopular() {

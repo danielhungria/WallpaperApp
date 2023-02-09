@@ -10,7 +10,9 @@ import br.com.dhungria.wallpaperapp.models.CategoryModel
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import com.bumptech.glide.Glide
 
-class MainAdapterCategories(): ListAdapter<CategoryModel, MainAdapterCategories.ItemViewHolder>(
+class MainAdapterCategories(
+        val onClick: (CategoryModel) -> Unit
+): ListAdapter<CategoryModel, MainAdapterCategories.ItemViewHolder>(
     DiffCallback()
 ) {
     private var fullList = mutableListOf<CategoryModel>()
@@ -24,6 +26,9 @@ class MainAdapterCategories(): ListAdapter<CategoryModel, MainAdapterCategories.
         fun bind(item: CategoryModel, position: Int) = with(binding) {
             Glide.with(itemView.context).load(item.image).into(imageViewCategory)
             textviewCategoriesCardFragmentMain.text = item.name
+            root.setOnClickListener {
+                onClick(item)
+            }
         }
     }
 
