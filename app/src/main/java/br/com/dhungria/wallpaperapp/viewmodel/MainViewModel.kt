@@ -16,16 +16,30 @@ class MainViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository
 ) : ViewModel() {
 
+    var field: String = "category"
+    var value: Any = "Anime"
+
     private val wallpaperList: MutableLiveData<List<WallpaperModel>> by lazy {
         MutableLiveData<List<WallpaperModel>>().also {
             loadWallpaperData()
         }
     }
+
+    private val wallpaperListFiltered: MutableLiveData<List<WallpaperModel>> by lazy {
+        MutableLiveData<List<WallpaperModel>>().also {
+            getWallpaperDataFiltered()
+        }
+    }
+
     private val categoryList: MutableLiveData<List<CategoryModel>> by lazy {
         MutableLiveData<List<CategoryModel>>().also {
             loadCategoryData()
         }
     }
+//    private val _wallpaperListModel = MutableLiveData<List<WallpaperModel>>()
+//    val wallpaperListModel: LiveData<List<WallpaperModel>>
+//        get() = _wallpaperListModel
+
 
     private fun loadWallpaperData() {
         firebaseRepository.queryWallpaper().addOnCompleteListener {
@@ -38,16 +52,6 @@ class MainViewModel @Inject constructor(
     private fun loadCategoryData() {
         viewModelScope.launch {
             firebaseRepository.queryCategory().addOnCompleteListener {
-                    if (it.isSuccessful && !it.result.isEmpty) {
-                        categoryList.value = it.result.toObjects(CategoryModel::class.java)
-                    }
-                }
-        }
-    }
-
-    fun loadCategoryDataFiltered(){
-        viewModelScope.launch {
-            firebaseRepository.queryCategoryFiltered("name", "Car").addOnCompleteListener {
                 if (it.isSuccessful && !it.result.isEmpty) {
                     categoryList.value = it.result.toObjects(CategoryModel::class.java)
                 }
@@ -55,8 +59,31 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    //    fun loadCategoryDataFiltered(){
+//        viewModelScope.launch {
+//            firebaseRepository.queryCategoryFiltered("name", "Car").addOnCompleteListener {
+//                if (it.isSuccessful && !it.result.isEmpty) {
+//                    categoryList.value = it.result.toObjects(CategoryModel::class.java)
+//                }
+//            }
+//        }
+//    }
+    private fun getWallpaperDataFiltered() {
+        viewModelScope.launch {
+            firebaseRepository.queryWallpaperFiltered(field, value).addOnCompleteListener {
+                if (it.isSuccessful && !it.result.isEmpty) {
+                    wallpaperListFiltered.value = it.result.toObjects(WallpaperModel::class.java)
+                }
+            }
+        }
+    }
+
     fun getWallpaperList(): LiveData<List<WallpaperModel>> {
         return wallpaperList
+    }
+
+    fun getWallpaperListFiltered(): LiveData<List<WallpaperModel>> {
+        return wallpaperListFiltered
     }
 
     fun getCategoryList(): LiveData<List<CategoryModel>> {

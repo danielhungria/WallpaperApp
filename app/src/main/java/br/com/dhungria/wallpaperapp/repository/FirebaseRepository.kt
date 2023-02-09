@@ -27,6 +27,12 @@ class FirebaseRepository @Inject constructor() {
             .orderBy("name", Query.Direction.ASCENDING)
             .get()
     }
+    fun queryWallpaperFiltered(field: String, value: Any): Task<QuerySnapshot>{
+        return firebaseFireStore
+            .collection("wallpaper")
+            .whereEqualTo(field, value)
+            .get()
+    }
     fun queryCategoryFiltered(field: String, value: Any): Task<QuerySnapshot>{
         return firebaseFireStore
             .collection("category")

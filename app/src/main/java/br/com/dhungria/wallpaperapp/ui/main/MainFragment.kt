@@ -29,7 +29,7 @@ class MainFragment : Fragment() {
         findNavController().navigate(R.id.action_fragment_main_to_wallpaper_fragment, bundleOf("IMAGE_TO_SHOW" to it))
     })
     private val mainAdapterCategories = MainAdapterCategories(onClick = {
-        findNavController().navigate(R.id.action_fragment_main_category_to_fragment_wallpaper_category)
+        findNavController().navigate(R.id.action_fragment_main_category_to_fragment_wallpaper_category, bundleOf("CATEGORY_TO_SHOW" to it))
     })
 
 

@@ -18,6 +18,7 @@ import br.com.dhungria.wallpaperapp.adapter.MainAdapterPopular
 import br.com.dhungria.wallpaperapp.adapter.WallpaperCategoryAdapter
 import br.com.dhungria.wallpaperapp.databinding.FragmentCategoryBinding
 import br.com.dhungria.wallpaperapp.databinding.FragmentMainBinding
+import br.com.dhungria.wallpaperapp.models.CategoryModel
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import br.com.dhungria.wallpaperapp.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,9 +27,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class WallpaperCategoryFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
-    private lateinit var binding: FragmentCategoryBinding
-
     private val wallpaperCategoryAdapter = WallpaperCategoryAdapter()
+    private val category by lazy { arguments?.getParcelable<CategoryModel>("CATEGORY_TO_SHOW") }
+    private lateinit var binding: FragmentCategoryBinding
 
 
     private fun setupRecyclerViewCategory() {
@@ -36,16 +37,19 @@ class WallpaperCategoryFragment : Fragment() {
             adapter = wallpaperCategoryAdapter
             val mLayoutManager = GridLayoutManager(requireContext(), 3)
             layoutManager = mLayoutManager
-
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViewCategory()
-        viewModel.getWallpaperList().observe(viewLifecycleOwner) {
+        viewModel.value = category?.name ?: ""
+        viewModel.getWallpaperListFiltered().observe(viewLifecycleOwner) {
             wallpaperCategoryAdapter.updateList(it)
         }
+//        viewModel.wallpaperListModel.observe(viewLifecycleOwner){
+//            wallpaperCategoryAdapter.updateList(it)
+//        }
     }
 
     override fun onCreateView(
