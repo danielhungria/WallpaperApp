@@ -1,7 +1,7 @@
 package br.com.dhungria.wallpaperapp.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
@@ -38,20 +38,30 @@ class WallpaperViewModel @Inject constructor(
 //    }
 
     fun onSaveEventFavorite(
+        id: String,
         name: String,
         image: String,
-        category: String
-    ){
+        category: String,
+        context: Context
+    ) {
         viewModelScope.launch {
             val wallpaperToSave = WallpaperModel(
-                id = 0,
+                id = id,
                 name = name,
                 image = image,
                 category = category,
                 favorite = true
             )
-            repository.insert(wallpaperToSave)
+            if (!repository.verifyWasFavorite(id)) {
+                repository.insert(wallpaperToSave)
+                Toast.makeText(context, "Favoritado com Sucesso!", Toast.LENGTH_SHORT).show()
+            }
+
         }
+    }
+
+    suspend fun verifyWasFavorite(id: String): Boolean {
+        return (repository.verifyWasFavorite(id))
     }
 
 }

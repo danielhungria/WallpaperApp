@@ -4,17 +4,17 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import java.util.UUID
 
-@Entity(tableName = "wallpaper_list")
+@Entity(tableName = "wallpaper_table")
 @Parcelize
 data class WallpaperModel(
-    @PrimaryKey
-    val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val idDB: Int = 0,
+    val id: String = "",
     val name: String = "",
     val image: String = "",
     val category: String = "",
-    val new: Boolean = false,
     val popular: Boolean = false,
-    val date: String? = "",
     val favorite: Boolean = false
 ):Parcelable

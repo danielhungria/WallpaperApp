@@ -22,6 +22,7 @@ object AppModule {
     ) = Room.databaseBuilder(context, AppDataBase::class.java, "app.database")
         .build()
 
+    @Singleton
     @Provides
     fun providesWallpaperDao(
         db:AppDataBase

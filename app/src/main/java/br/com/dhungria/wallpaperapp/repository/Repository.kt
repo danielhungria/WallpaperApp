@@ -10,13 +10,8 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val wallpaperDao: WallpaperDao) {
 
-//    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firebaseFireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val firebaseFirestoreCategory: FirebaseFirestore = FirebaseFirestore.getInstance()
-
-//    fun getUser(): FirebaseUser?{
-//        return firebaseAuth.currentUser
-//    }
 
     fun queryWallpaper(): Task<QuerySnapshot>{
         return firebaseFireStore
@@ -43,5 +38,7 @@ class Repository @Inject constructor(private val wallpaperDao: WallpaperDao) {
     }
 
     suspend fun insert(wallpaperModel: WallpaperModel) = wallpaperDao.insert(wallpaperModel)
+
+    suspend fun verifyWasFavorite(id: String):Boolean = wallpaperDao.verifyWasFavorite(id)
 
 }
