@@ -41,4 +41,6 @@ class Repository @Inject constructor(private val wallpaperDao: WallpaperDao) {
 
     suspend fun verifyWasFavorite(id: String):Boolean = wallpaperDao.verifyWasFavorite(id)
 
+    fun getAllFavoritesWallpapers() = wallpaperDao.getAllFavoritesWallpapers()
+
 }

@@ -6,13 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.dhungria.wallpaperapp.databinding.CardRecyclerFragmentCategoryBinding
-import br.com.dhungria.wallpaperapp.databinding.CardRecyclerFragmentMainBinding
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import com.bumptech.glide.Glide
 
-class WallpaperCategoryAdapter(
+class WallpaperCategoriesAdapter(
 //    val onClick: (WallpaperModel) -> Unit
-): ListAdapter<WallpaperModel, WallpaperCategoryAdapter.ItemViewHolder>(DiffCallback()) {
+): ListAdapter<WallpaperModel, WallpaperCategoriesAdapter.ItemViewHolder>(DiffCallback()) {
 
     private var fullList = mutableListOf<WallpaperModel>()
 

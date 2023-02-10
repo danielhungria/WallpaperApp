@@ -84,7 +84,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_categories_fragment_main"
-                tools:itemCount="1"
+                tools:itemCount="2"
                 tools:listitem="@layout/card_recycler_categories_fragment_main" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import br.com.dhungria.wallpaperapp.R
 import br.com.dhungria.wallpaperapp.databinding.WallpaperLayoutFragmentBinding
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
@@ -32,10 +33,17 @@ class WallpaperFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupNavigatePopBackStack()
         wallpaperModel?.let { wallpaperModel ->
             setupImageView(wallpaperModel)
             setupFavoriteButton(wallpaperModel)
             setupFavoriteBackgroundButton(wallpaperModel)
+        }
+    }
+
+    private fun setupNavigatePopBackStack() {
+        binding.toolbarWallpaperFragment.setNavigationOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
