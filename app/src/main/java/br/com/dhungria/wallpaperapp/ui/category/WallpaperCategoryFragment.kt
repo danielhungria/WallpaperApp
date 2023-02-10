@@ -47,9 +47,6 @@ class WallpaperCategoryFragment : Fragment() {
         viewModel.getWallpaperListFiltered().observe(viewLifecycleOwner) {
             wallpaperCategoryAdapter.updateList(it)
         }
-//        viewModel.wallpaperListModel.observe(viewLifecycleOwner){
-//            wallpaperCategoryAdapter.updateList(it)
-//        }
     }
 
     override fun onCreateView(

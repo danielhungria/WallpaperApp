@@ -1,12 +1,14 @@
 package br.com.dhungria.wallpaperapp.repository
 
+import br.com.dhungria.wallpaperapp.data.dao.WallpaperDao
+import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import javax.inject.Inject
 
-class FirebaseRepository @Inject constructor() {
+class Repository @Inject constructor(private val wallpaperDao: WallpaperDao) {
 
 //    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firebaseFireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -39,5 +41,7 @@ class FirebaseRepository @Inject constructor() {
             .whereEqualTo(field, value)
             .get()
     }
+
+    suspend fun insert(wallpaperModel: WallpaperModel) = wallpaperDao.insert(wallpaperModel)
 
 }

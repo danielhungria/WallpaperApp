@@ -6,18 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.dhungria.wallpaperapp.models.CategoryModel
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
-import br.com.dhungria.wallpaperapp.repository.FirebaseRepository
+import br.com.dhungria.wallpaperapp.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val firebaseRepository: FirebaseRepository
+    private val firebaseRepository: Repository
 ) : ViewModel() {
 
     var field: String = "category"
-    var value: Any = "Anime"
+    var value: Any = ""
 
     private val wallpaperList: MutableLiveData<List<WallpaperModel>> by lazy {
         MutableLiveData<List<WallpaperModel>>().also {
@@ -36,10 +36,6 @@ class MainViewModel @Inject constructor(
             loadCategoryData()
         }
     }
-//    private val _wallpaperListModel = MutableLiveData<List<WallpaperModel>>()
-//    val wallpaperListModel: LiveData<List<WallpaperModel>>
-//        get() = _wallpaperListModel
-
 
     private fun loadWallpaperData() {
         firebaseRepository.queryWallpaper().addOnCompleteListener {
