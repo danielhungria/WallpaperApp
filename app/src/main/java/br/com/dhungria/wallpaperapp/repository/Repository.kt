@@ -12,11 +12,6 @@ class Repository @Inject constructor(private val wallpaperDao: WallpaperDao) {
 
     private val firebaseFireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    fun queryWallpaper(): Task<QuerySnapshot>{
-        return firebaseFireStore
-            .collection("wallpaper")
-            .get()
-    }
     fun queryCategory(): Task<QuerySnapshot>{
         return firebaseFireStore
             .collection("category")

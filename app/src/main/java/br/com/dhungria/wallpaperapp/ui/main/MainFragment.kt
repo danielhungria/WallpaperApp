@@ -54,7 +54,8 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViewPopular()
         setupRecyclerViewCategories()
-        viewModel.getWallpaperList().observe(viewLifecycleOwner, Observer{
+        viewModel.getWallpaperDataFiltered()
+        viewModel.wallpaperModel.observe(viewLifecycleOwner, Observer{
             mainAdapterPopular.updateList(it)
         })
         viewModel.getCategoryList().observe(viewLifecycleOwner) {

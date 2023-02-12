@@ -16,6 +16,8 @@ interface WallpaperDao {
     suspend fun verifyWasFavorite(id: String): Boolean
     @Query("SELECT * FROM wallpaper_table WHERE favorite = 1")
     fun getAllFavoritesWallpapers(): Flow<List<WallpaperModel>>
+    @Query("SELECT * FROM wallpaper_table WHERE popular = 1")
+    fun getAllPopularWallpapers(): Flow<List<WallpaperModel>>
     @Query("DELETE FROM wallpaper_table WHERE id = :id")
     suspend fun delete(id: String)
 

@@ -16,11 +16,13 @@ class MainViewModel @Inject constructor(
     private val firebaseRepository: Repository
 ) : ViewModel() {
 
-    private val wallpaperList: MutableLiveData<List<WallpaperModel>> by lazy {
-        MutableLiveData<List<WallpaperModel>>().also {
-            loadWallpaperData()
-        }
-    }
+    private var field: String = "popular"
+    var value: Boolean = true
+
+    private val _wallpaperModel = MutableLiveData<List<WallpaperModel>>()
+    val wallpaperModel: LiveData<List<WallpaperModel>>
+        get() = _wallpaperModel
+
 
     private val categoryList: MutableLiveData<List<CategoryModel>> by lazy {
         MutableLiveData<List<CategoryModel>>().also {
@@ -28,13 +30,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun loadWallpaperData() {
-        firebaseRepository.queryWallpaper().addOnCompleteListener {
-            if (it.isSuccessful && !it.result.isEmpty) {
-                wallpaperList.value = it.result.toObjects(WallpaperModel::class.java)
-            }
-        }
-    }
 
     private fun loadCategoryData() {
         viewModelScope.launch {
@@ -46,9 +41,16 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getWallpaperList(): LiveData<List<WallpaperModel>> {
-        return wallpaperList
+    fun getWallpaperDataFiltered() {
+        viewModelScope.launch {
+            firebaseRepository.queryWallpaperFiltered(field, value).addOnCompleteListener {
+                if (it.isSuccessful && !it.result.isEmpty) {
+                    _wallpaperModel.value = it.result.toObjects(WallpaperModel::class.java)
+                }
+            }
+        }
     }
+
 
     fun getCategoryList(): LiveData<List<CategoryModel>> {
         return categoryList
