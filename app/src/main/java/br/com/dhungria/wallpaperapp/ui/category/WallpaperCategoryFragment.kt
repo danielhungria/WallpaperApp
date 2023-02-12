@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import br.com.dhungria.wallpaperapp.R
 import br.com.dhungria.wallpaperapp.adapter.WallpaperCategoriesAdapter
 import br.com.dhungria.wallpaperapp.databinding.FragmentCategoryBinding
 import br.com.dhungria.wallpaperapp.models.CategoryModel
@@ -17,7 +20,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class WallpaperCategoryFragment : Fragment() {
 
     private val viewModel: WallpaperCategoryViewModel by viewModels()
-    private val wallpaperCategoryAdapter = WallpaperCategoriesAdapter()
+    private val wallpaperCategoryAdapter = WallpaperCategoriesAdapter(onClick = {
+        findNavController().navigate(
+            R.id.action_wallpaper_category_to_fragment_wallpaper_category,
+            bundleOf("IMAGE_TO_SHOW" to it)
+        )
+    }
+
+    )
     private val category by lazy { arguments?.getParcelable<CategoryModel>("CATEGORY_TO_SHOW") }
     private lateinit var binding: FragmentCategoryBinding
 
@@ -47,8 +57,11 @@ class WallpaperCategoryFragment : Fragment() {
             layoutManager = mLayoutManager
         }
     }
-    private fun setupToolbarTitle() {
-        binding.toolbarCategoryFragment.title = category?.name ?: "Category"
+    private fun setupToolbarTitle() = with(binding.toolbarCategoryFragment){
+        title = category?.name ?: "Category"
+        setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
 }

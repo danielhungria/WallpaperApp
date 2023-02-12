@@ -10,7 +10,7 @@ import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import com.bumptech.glide.Glide
 
 class WallpaperCategoriesAdapter(
-//    val onClick: (WallpaperModel) -> Unit
+    val onClick: (WallpaperModel) -> Unit
 ): ListAdapter<WallpaperModel, WallpaperCategoriesAdapter.ItemViewHolder>(DiffCallback()) {
 
     private var fullList = mutableListOf<WallpaperModel>()
@@ -24,7 +24,7 @@ class WallpaperCategoriesAdapter(
         fun bind(item: WallpaperModel) = with(binding){
             Glide.with(itemView.context).load(item.image).into(imageview)
             root.setOnClickListener {
-//                onClick(item)
+                onClick(item)
             }
         }
     }

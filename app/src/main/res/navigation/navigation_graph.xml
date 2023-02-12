@@ -34,6 +34,10 @@
         android:name="br.com.dhungria.wallpaperapp.ui.category.WallpaperCategoryFragment"
         tools:layout="@layout/fragment_category"
         android:label="wallpaper_category_fragment">
+            <action
+                android:id="@+id/action_wallpaper_category_to_fragment_wallpaper_category"
+                app:destination="@+id/wallpaper_fragment"
+                />
     </fragment>
 
     <fragment
@@ -44,6 +48,10 @@
         <action
             android:id="@+id/action_favorite_fragment_to_fragment_main"
             app:destination="@+id/fragment_main" />
+        <action
+            android:id="@+id/action_favorite_fragment_to_fragment_wallpaper_category"
+            app:destination="@+id/wallpaper_fragment"
+            />
     </fragment>
 
 </navigation>
