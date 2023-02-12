@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -14,7 +15,9 @@ import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import br.com.dhungria.wallpaperapp.viewmodel.WallpaperViewModel
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class WallpaperFragment : Fragment() {
@@ -31,6 +34,7 @@ class WallpaperFragment : Fragment() {
         binding = WallpaperLayoutFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupNavigatePopBackStack()
@@ -39,6 +43,7 @@ class WallpaperFragment : Fragment() {
             setupFavoriteButton(wallpaperModel)
             setupFavoriteBackgroundButton(wallpaperModel)
         }
+        viewModel.fetchWallpaper()
     }
 
     private fun setupNavigatePopBackStack() {
@@ -53,21 +58,30 @@ class WallpaperFragment : Fragment() {
                 binding.buttonWallpaperFragment.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
             }
         }
+
     private fun setupImageView(wallpaperModel: WallpaperModel) {
         context?.let {
             Glide.with(it).load(wallpaperModel.image).into(binding.imageViewWallpaperFragment)
         }
     }
+
     private fun setupFavoriteButton(wallpaperModel: WallpaperModel) {
         binding.buttonWallpaperFragment.setOnClickListener {
-            viewModel.onSaveEventFavorite(
-                id = wallpaperModel.id,
-                name = wallpaperModel.name,
-                image = wallpaperModel.image,
-                category = wallpaperModel.category,
-                context = requireContext()
-            )
-            binding.buttonWallpaperFragment.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+            viewModel.viewModelScope.launch {
+                if (viewModel.verifyWasFavorite(wallpaperModel.id)) {
+                    binding.buttonWallpaperFragment.setBackgroundResource(R.drawable.ic_baseline_favorite_border_24)
+                    viewModel.removeFavorite(wallpaperModel.id,requireContext())
+                } else {
+                    binding.buttonWallpaperFragment.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                    viewModel.onSaveEventFavorite(
+                        id = wallpaperModel.id,
+                        name = wallpaperModel.name,
+                        image = wallpaperModel.image,
+                        category = wallpaperModel.category,
+                        context = requireContext()
+                    )
+                }
+            }
         }
     }
 

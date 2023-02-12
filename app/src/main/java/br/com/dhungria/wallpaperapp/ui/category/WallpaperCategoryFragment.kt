@@ -10,29 +10,22 @@ import androidx.recyclerview.widget.GridLayoutManager
 import br.com.dhungria.wallpaperapp.adapter.WallpaperCategoriesAdapter
 import br.com.dhungria.wallpaperapp.databinding.FragmentCategoryBinding
 import br.com.dhungria.wallpaperapp.models.CategoryModel
-import br.com.dhungria.wallpaperapp.viewmodel.MainViewModel
+import br.com.dhungria.wallpaperapp.viewmodel.WallpaperCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WallpaperCategoryFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: WallpaperCategoryViewModel by viewModels()
     private val wallpaperCategoryAdapter = WallpaperCategoriesAdapter()
     private val category by lazy { arguments?.getParcelable<CategoryModel>("CATEGORY_TO_SHOW") }
     private lateinit var binding: FragmentCategoryBinding
 
 
-    private fun setupRecyclerViewCategory() {
-        binding.recyclerviewCategoriesFragmentCategory.apply {
-            adapter = wallpaperCategoryAdapter
-            val mLayoutManager = GridLayoutManager(requireContext(), 3)
-            layoutManager = mLayoutManager
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViewCategory()
+        setupToolbarTitle()
         viewModel.value = category?.name ?: ""
         viewModel.getWallpaperListFiltered().observe(viewLifecycleOwner) {
             wallpaperCategoryAdapter.updateList(it)
@@ -46,4 +39,16 @@ class WallpaperCategoryFragment : Fragment() {
         binding = FragmentCategoryBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    private fun setupRecyclerViewCategory() {
+        binding.recyclerviewCategoriesFragmentCategory.apply {
+            adapter = wallpaperCategoryAdapter
+            val mLayoutManager = GridLayoutManager(requireContext(), 3)
+            layoutManager = mLayoutManager
+        }
+    }
+    private fun setupToolbarTitle() {
+        binding.toolbarCategoryFragment.title = category?.name ?: "Category"
+    }
+
 }

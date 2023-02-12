@@ -19,8 +19,7 @@
             app:destination="@+id/wallpaper_category_fragment"/>
         <action
             android:id="@+id/action_fragment_main_to_favorite_fragment"
-            app:destination="@+id/favorite_fragment"
-            />
+            app:destination="@+id/favorite_fragment" />
     </fragment>
 
     <fragment
@@ -44,8 +43,7 @@
         android:label="favorite_fragment">
         <action
             android:id="@+id/action_favorite_fragment_to_fragment_main"
-            app:destination="@+id/fragment_main"
-            />
+            app:destination="@+id/fragment_main" />
     </fragment>
 
 </navigation>

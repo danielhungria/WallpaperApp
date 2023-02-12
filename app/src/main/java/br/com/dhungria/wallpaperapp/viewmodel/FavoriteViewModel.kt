@@ -21,24 +21,7 @@ class FavoriteViewModel @Inject constructor(
     private val _wallpaperModel = MutableLiveData<List<WallpaperModel>>()
     val wallpaperModel: LiveData<List<WallpaperModel>>
         get() = _wallpaperModel
-//
-//    private val wallpaperList: MutableLiveData<List<WallpaperModel>> by lazy {
-//        MutableLiveData<List<WallpaperModel>>().also {
-//            loadWallpaperData()
-//        }
-//    }
-//
-//    private fun loadWallpaperData() {
-//        repository.queryWallpaper().addOnCompleteListener {
-//            if (it.isSuccessful && !it.result.isEmpty) {
-//                wallpaperList.value = it.result.toObjects(WallpaperModel::class.java)
-//            }
-//        }
-//    }
-//
-//    fun getWallpaperList(): LiveData<List<WallpaperModel>> {
-//        return wallpaperList
-//    }
+
 
     fun getAllFavoritesWallpapers() {
         viewModelScope.launch {

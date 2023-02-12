@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0C0C0C"
     tools:context=".ui.main.MainFragment">
 
     <ScrollView
@@ -32,7 +31,6 @@
                     android:layout_height="?attr/actionBarSize"
                     app:title="Category"
                     app:titleCentered="true"
-                    app:titleTextColor="#F8F8F8"
                     app:navigationIcon="@drawable/ic_baseline_navigate_before_24"/>
 
             </com.google.android.material.appbar.AppBarLayout>
