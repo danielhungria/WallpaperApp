@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_fragment_main_to_favorite_fragment"
             app:destination="@+id/favorite_fragment" />
+        <action
+            android:id="@+id/action_fragment_main_to_search_fragment"
+            app:destination="@+id/search_fragment" />
     </fragment>
 
     <fragment
@@ -50,6 +53,17 @@
             app:destination="@+id/fragment_main" />
         <action
             android:id="@+id/action_favorite_fragment_to_fragment_wallpaper_category"
+            app:destination="@+id/wallpaper_fragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="br.com.dhungria.wallpaperapp.ui.search.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment">
+        <action
+            android:id="@+id/action_search_fragment_to_fragment_wallpaper"
             app:destination="@+id/wallpaper_fragment"
             />
     </fragment>

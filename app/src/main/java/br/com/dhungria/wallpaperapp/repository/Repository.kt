@@ -24,10 +24,10 @@ class Repository @Inject constructor(private val wallpaperDao: WallpaperDao) {
             .whereEqualTo(field, value)
             .get()
     }
-    fun queryCategoryFiltered(field: String, value: Any): Task<QuerySnapshot>{
+
+    fun queryAllWallpaper():Task<QuerySnapshot>{
         return firebaseFireStore
-            .collection("category")
-            .whereEqualTo(field, value)
+            .collection("wallpaper")
             .get()
     }
 
