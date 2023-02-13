@@ -16,6 +16,9 @@ class SearchViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
+    var query = ""
+    var newText = ""
+
     private val _wallpaperModel = MutableLiveData<List<WallpaperModel>>()
     val wallpaperModel: LiveData<List<WallpaperModel>>
         get() = _wallpaperModel
