@@ -46,16 +46,30 @@ class SearchFragment : Fragment() {
         setupToolbarClick()
         viewModel.queryAllWallpaper()
         viewModel.wallpaperModel.observe(viewLifecycleOwner) {
-            searchAdapter.updateList(it)
+            setupButtonDeleteTag()
             recoverySearch()
+            searchAdapter.updateList(it)
+        }
+
+    }
+
+    private fun setupButtonDeleteTag() {
+        binding.buttonCardViewDeleteTagSearchFragment.setOnClickListener {
+            viewModel.newText = ""
+            viewModel.query = ""
+            binding.cardViewTagSearchFragment.visibility = View.GONE
+            viewModel.queryAllWallpaper()
         }
     }
 
     private fun recoverySearch() {
         if (viewModel.newText.isNotBlank()) {
             searchAdapter.filter.filter(viewModel.newText)
+            binding.textViewCardViewTagSearchFragment.text = viewModel.newText
         } else if (viewModel.query.isNotBlank()) {
             searchAdapter.filter.filter(viewModel.query)
+        }else{
+            binding.cardViewTagSearchFragment.visibility = View.GONE
         }
     }
 
@@ -91,14 +105,12 @@ class SearchFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.query = query.toString()
                 searchAdapter.filter.filter(viewModel.query)
-                Log.i("SearchFragment", "onQueryTextSubmit: $query")
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.newText = newText.toString()
                 searchAdapter.filter.filter(viewModel.newText)
-                Log.i("SearchFragment", "onQueryTextSubmit: $newText")
                 return false
             }
         })
