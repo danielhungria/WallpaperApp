@@ -38,6 +38,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
         android:background="@drawable/ic_baseline_favorite_border_24"
+        android:visibility="visible"
      />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_download_wallpaper_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp"
+        app:icon="@drawable/baseline_file_download_24"
+        android:text="Download"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:iconTint="@color/black"
+        android:alpha="0.7"
+        android:backgroundTint="@color/white"
+        style="@style/Widget.Material3.Button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
