@@ -50,7 +50,7 @@ class WallpaperFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setPermission()
         setupNavigatePopBackStack()
-        setupHideElements()
+        setupClickHideElements()
         setupButtonDownload()
         wallpaperModel?.let { wallpaperModel ->
             setupImageView(wallpaperModel)
@@ -66,21 +66,25 @@ class WallpaperFragment : Fragment() {
         }
     }
 
-    private fun setupHideElements() = with(binding){
-        imageViewWallpaperFragment.setOnClickListener {
-            when (viewModel.hideElements) {
-                true -> {
-                    buttonWallpaperFragment.visibility = View.GONE
-                    buttonDownloadWallpaperFragment.visibility = View.GONE
-                    toolbarWallpaperFragment.visibility = View.GONE
-                    viewModel.hideElements = false
-                }
-                else -> {
-                    buttonWallpaperFragment.visibility = View.VISIBLE
-                    buttonDownloadWallpaperFragment.visibility = View.VISIBLE
-                    toolbarWallpaperFragment.visibility = View.VISIBLE
-                    viewModel.hideElements = true
-                }
+    private fun setupClickHideElements(){
+        checkState()
+        binding.imageViewWallpaperFragment.setOnClickListener {
+            viewModel.hideElements = !viewModel.hideElements
+            checkState()
+        }
+    }
+
+    private fun checkState() = with(binding) {
+        when (viewModel.hideElements) {
+            true -> {
+                buttonWallpaperFragment.visibility = View.GONE
+                buttonDownloadWallpaperFragment.visibility = View.GONE
+                toolbarWallpaperFragment.visibility = View.GONE
+            }
+            else -> {
+                buttonWallpaperFragment.visibility = View.VISIBLE
+                buttonDownloadWallpaperFragment.visibility = View.VISIBLE
+                toolbarWallpaperFragment.visibility = View.VISIBLE
             }
         }
     }
