@@ -22,11 +22,11 @@
         android:icon="@drawable/ic_baseline_favorite_24"
         />
 
-    <item
-        android:id="@+id/wallpaper_category_fragment"
-        android:enabled="false"
-        android:title="Category"
-        android:icon="@drawable/baseline_category_24"
-        />
+<!--    <item-->
+<!--        android:id="@+id/fragment_category"-->
+<!--        android:enabled="false"-->
+<!--        android:title="Category"-->
+<!--        android:icon="@drawable/baseline_category_24"-->
+<!--        />-->
 
 </menu>

@@ -38,9 +38,6 @@
         <action
             android:id="@+id/action_wallpaper_category_to_fragment_wallpaper_category"
             app:destination="@+id/wallpaper_fragment" />
-        <action
-            android:id="@+id/action_wallpaper_category_to_fragment_main"
-            app:destination="@+id/fragment_main"/>
     </fragment>
 
     <fragment

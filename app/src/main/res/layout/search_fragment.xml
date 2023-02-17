@@ -23,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/Transparent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/CustomToolbar">
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar_search_fragment"
@@ -31,7 +32,9 @@
                     android:layout_height="?attr/actionBarSize"
                     app:menu="@menu/menu_fragment_search"
                     app:title="Search Wallpapers"
-                    app:titleCentered="true" />
+                    app:titleCentered="true"
+                    style="@style/CustomToolbar"
+                    />
 
             </com.google.android.material.appbar.AppBarLayout>
 

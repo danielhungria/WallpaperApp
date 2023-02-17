@@ -23,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="@color/Transparent">
+                android:background="@color/Transparent"
+                style="@style/CustomToolbar">
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar_category_fragment"
@@ -31,7 +32,8 @@
                     android:layout_height="?attr/actionBarSize"
                     app:title="Category"
                     app:titleCentered="true"
-                    app:navigationIcon="@drawable/ic_baseline_navigate_before_24"/>
+                    app:navigationIcon="@drawable/ic_baseline_navigate_before_24"
+                    style="@style/CustomToolbar"/>
 
             </com.google.android.material.appbar.AppBarLayout>
 
