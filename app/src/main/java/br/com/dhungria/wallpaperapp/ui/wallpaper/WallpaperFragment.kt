@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import android.Manifest
+import android.app.WallpaperManager
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -52,12 +53,49 @@ class WallpaperFragment : Fragment() {
         setupNavigatePopBackStack()
         setupClickHideElements()
         setupButtonDownload()
+        setupButtonExpanded()
+        setupButtonSetWallpaper()
+        checkStateButtons()
         wallpaperModel?.let { wallpaperModel ->
             setupImageView(wallpaperModel)
             setupFavoriteButton(wallpaperModel)
             setupFavoriteBackgroundButton(wallpaperModel)
         }
         viewModel.fetchWallpaper()
+
+    }
+
+    private fun setupButtonSetWallpaper() = with(binding) {
+        buttonSetWallpaperBothScreenFragment.setOnClickListener {
+            setWallpaper("Both")
+        }
+        buttonSetWallpaperHomeFragment.setOnClickListener {
+            setWallpaper("Home")
+        }
+        buttonSetWallpaperLockFragment.setOnClickListener {
+            setWallpaper("Lock")
+        }
+    }
+
+    private fun setupButtonExpanded() {
+        binding.buttonExpandedWallpaperFragment.setOnClickListener {
+            viewModel.buttonExpanded = !viewModel.buttonExpanded
+            checkStateButtons()
+        }
+    }
+
+    private fun checkStateButtons() = with(binding) {
+        if (viewModel.buttonExpanded) {
+            buttonDownloadWallpaperFragment.visibility = View.VISIBLE
+            buttonSetWallpaperHomeFragment.visibility = View.VISIBLE
+            buttonSetWallpaperLockFragment.visibility = View.VISIBLE
+            buttonSetWallpaperBothScreenFragment.visibility = View.VISIBLE
+        } else {
+            buttonDownloadWallpaperFragment.visibility = View.INVISIBLE
+            buttonSetWallpaperHomeFragment.visibility = View.INVISIBLE
+            buttonSetWallpaperLockFragment.visibility = View.INVISIBLE
+            buttonSetWallpaperBothScreenFragment.visibility = View.INVISIBLE
+        }
     }
 
     private fun setupButtonDownload() {
@@ -66,10 +104,32 @@ class WallpaperFragment : Fragment() {
         }
     }
 
+    private fun setWallpaper(screen: String) {
+        val bitmap = binding.imageViewWallpaperFragment.drawToBitmap()
+        val wallpaperManager = WallpaperManager.getInstance(context)
+        when(screen){
+            "Home" -> { wallpaperManager.setBitmap(bitmap) }
+            "Both" -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    val flagLock = WallpaperManager.FLAG_LOCK
+                    wallpaperManager.setBitmap(bitmap)
+                    wallpaperManager.setBitmap(bitmap, null, true, flagLock)
+                }
+            }
+            else -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    val flagLock = WallpaperManager.FLAG_LOCK
+                    wallpaperManager.setBitmap(bitmap, null, true, flagLock)
+                }
+            }
+        }
+    }
+
     private fun setupClickHideElements(){
         checkState()
         binding.imageViewWallpaperFragment.setOnClickListener {
             viewModel.hideElements = !viewModel.hideElements
+            viewModel.buttonExpanded = false
             checkState()
         }
     }
@@ -78,12 +138,16 @@ class WallpaperFragment : Fragment() {
         when (viewModel.hideElements) {
             true -> {
                 buttonWallpaperFragment.visibility = View.GONE
-                buttonDownloadWallpaperFragment.visibility = View.GONE
+                buttonDownloadWallpaperFragment.visibility = View.INVISIBLE
+                buttonSetWallpaperBothScreenFragment.visibility = View.INVISIBLE
+                buttonSetWallpaperHomeFragment.visibility = View.INVISIBLE
+                buttonSetWallpaperLockFragment.visibility = View.INVISIBLE
+                buttonExpandedWallpaperFragment.visibility = View.GONE
                 toolbarWallpaperFragment.visibility = View.GONE
             }
             else -> {
                 buttonWallpaperFragment.visibility = View.VISIBLE
-                buttonDownloadWallpaperFragment.visibility = View.VISIBLE
+                buttonExpandedWallpaperFragment.visibility = View.VISIBLE
                 toolbarWallpaperFragment.visibility = View.VISIBLE
             }
         }
@@ -91,7 +155,7 @@ class WallpaperFragment : Fragment() {
 
     //passar funcao para o viewmodel e rodar em background (dispatchers.io)
     private fun saveImage() {
-        val drawToBitmap = binding.imageViewWallpaperFragment.drawToBitmap()
+        val bitmap = binding.imageViewWallpaperFragment.drawToBitmap()
         val outputStream: OutputStream
         try {
             val uri: Uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -105,7 +169,7 @@ class WallpaperFragment : Fragment() {
             contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/*")
             val imageUri = resolver?.insert(uri, contentValues)
             outputStream = resolver?.openOutputStream(Objects.requireNonNull(imageUri)!!)!!
-            drawToBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
             Objects.requireNonNull(outputStream)
             Toast.makeText(context, "Imagem salva com sucesso", Toast.LENGTH_LONG).show()
         } catch (e: Exception) {

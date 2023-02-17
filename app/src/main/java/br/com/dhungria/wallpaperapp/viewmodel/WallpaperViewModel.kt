@@ -19,6 +19,9 @@ class WallpaperViewModel @Inject constructor(
 ) : ViewModel() {
 
     var hideElements: Boolean = false
+    var buttonExpanded: Boolean = false
+
+
     private val _wallpaperModel = MutableLiveData<List<WallpaperModel>>()
     val wallpaperModel: LiveData<List<WallpaperModel>>
         get() = _wallpaperModel

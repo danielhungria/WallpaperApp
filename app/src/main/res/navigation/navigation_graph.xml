@@ -8,15 +8,14 @@
     <fragment
         android:id="@+id/fragment_main"
         android:name="br.com.dhungria.wallpaperapp.ui.main.MainFragment"
-        tools:layout="@layout/fragment_main"
-        android:label="fragment_main">
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_fragment_main_to_wallpaper_fragment"
-            app:destination="@+id/wallpaper_fragment"
-           />
+            app:destination="@+id/wallpaper_fragment" />
         <action
             android:id="@+id/action_fragment_main_category_to_fragment_wallpaper_category"
-            app:destination="@+id/wallpaper_category_fragment"/>
+            app:destination="@+id/wallpaper_category_fragment" />
         <action
             android:id="@+id/action_fragment_main_to_favorite_fragment"
             app:destination="@+id/favorite_fragment" />
@@ -28,33 +27,33 @@
     <fragment
         android:id="@+id/wallpaper_fragment"
         android:name="br.com.dhungria.wallpaperapp.ui.wallpaper.WallpaperFragment"
-        tools:layout="@layout/wallpaper_layout_fragment"
-        android:label="wallpaper_fragment">
-    </fragment>
+        android:label="wallpaper_fragment"
+        tools:layout="@layout/wallpaper_layout_fragment" />
 
     <fragment
         android:id="@+id/wallpaper_category_fragment"
         android:name="br.com.dhungria.wallpaperapp.ui.category.WallpaperCategoryFragment"
-        tools:layout="@layout/fragment_category"
-        android:label="wallpaper_category_fragment">
-            <action
-                android:id="@+id/action_wallpaper_category_to_fragment_wallpaper_category"
-                app:destination="@+id/wallpaper_fragment"
-                />
+        android:label="wallpaper_category_fragment"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_wallpaper_category_to_fragment_wallpaper_category"
+            app:destination="@+id/wallpaper_fragment" />
+        <action
+            android:id="@+id/action_wallpaper_category_to_fragment_main"
+            app:destination="@+id/fragment_main"/>
     </fragment>
 
     <fragment
         android:id="@+id/favorite_fragment"
         android:name="br.com.dhungria.wallpaperapp.ui.favorite.FavoriteFragment"
-        tools:layout="@layout/favorite_fragment"
-        android:label="favorite_fragment">
+        android:label="favorite_fragment"
+        tools:layout="@layout/favorite_fragment">
         <action
             android:id="@+id/action_favorite_fragment_to_fragment_main"
             app:destination="@+id/fragment_main" />
         <action
             android:id="@+id/action_favorite_fragment_to_fragment_wallpaper_category"
-            app:destination="@+id/wallpaper_fragment"
-            />
+            app:destination="@+id/wallpaper_fragment" />
     </fragment>
 
     <fragment
@@ -64,8 +63,7 @@
         tools:layout="@layout/search_fragment">
         <action
             android:id="@+id/action_search_fragment_to_fragment_wallpaper"
-            app:destination="@+id/wallpaper_fragment"
-            />
+            app:destination="@+id/wallpaper_fragment" />
     </fragment>
 
 </navigation>
