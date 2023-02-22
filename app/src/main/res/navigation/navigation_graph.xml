@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/fragment_main">
+    app:startDestination="@id/admin_screen_fragment">
 
     <fragment
         android:id="@+id/fragment_main"
@@ -62,5 +62,11 @@
             android:id="@+id/action_search_fragment_to_fragment_wallpaper"
             app:destination="@+id/wallpaper_fragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/admin_screen_fragment"
+        android:name="br.com.dhungria.wallpaperapp.ui.admin.AdminScreenFragment"
+        android:label="admin_screen_fragment"
+        tools:layout="@layout/admin_screen_fragment"/>
 
 </navigation>
