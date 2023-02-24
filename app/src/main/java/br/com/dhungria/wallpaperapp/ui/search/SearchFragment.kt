@@ -2,14 +2,15 @@ package br.com.dhungria.wallpaperapp.ui.search
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.dhungria.wallpaperapp.R
@@ -52,6 +53,17 @@ class SearchFragment : Fragment() {
         }
 
     }
+    override fun onPause() {
+        super.onPause()
+        val menuitem = binding.toolbarSearchFragment.menu.findItem(R.id.action_search)
+        val search = menuitem.actionView as SearchView
+        search.clearFocus()
+        search.onActionViewCollapsed()
+        val toolbar = binding.toolbarSearchFragment.menu
+        toolbar.close()
+        toolbar.clear()
+    }
+
 
     private fun setupButtonDeleteTag() {
         binding.buttonCardViewDeleteTagSearchFragment.setOnClickListener {
@@ -68,6 +80,7 @@ class SearchFragment : Fragment() {
             binding.textViewCardViewTagSearchFragment.text = viewModel.newText
         } else if (viewModel.query.isNotBlank()) {
             searchAdapter.filter.filter(viewModel.query)
+            binding.textViewCardViewTagSearchFragment.text = viewModel.query
         }else{
             binding.cardViewTagSearchFragment.visibility = View.GONE
         }
@@ -111,7 +124,7 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.newText = newText.toString()
                 searchAdapter.filter.filter(viewModel.newText)
-                return false
+                return true
             }
         })
         searchView.setOnCloseListener {
@@ -119,6 +132,8 @@ class SearchFragment : Fragment() {
             true
         }
     }
+
+
 }
 
 

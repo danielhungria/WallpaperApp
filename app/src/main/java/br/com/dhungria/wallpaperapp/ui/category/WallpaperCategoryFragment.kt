@@ -57,7 +57,8 @@ class WallpaperCategoryFragment : Fragment() {
             layoutManager = mLayoutManager
         }
     }
-    private fun setupToolbarTitle() = with(binding.toolbarCategoryFragment){
+
+    private fun setupToolbarTitle() = with(binding.toolbarCategoryFragment) {
         title = category?.name ?: "Category"
         setNavigationOnClickListener {
             findNavController().popBackStack()

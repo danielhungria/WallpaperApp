@@ -18,11 +18,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupNavHost()
     }
+
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         binding.navigationBottomActivityMain.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.wallpaper_fragment) {
+            if (destination.id == R.id.wallpaper_fragment || destination.id == R.id.wallpaper_category_fragment) {
                 binding.navigationBottomActivityMain.visibility = View.GONE
             } else {
                 binding.navigationBottomActivityMain.visibility = View.VISIBLE
