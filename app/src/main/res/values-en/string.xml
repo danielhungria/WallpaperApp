@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="app_name">WallPaper App</string>
+        <string name="category">Category</string>
+        <string name="popular_wallpapers">Popular</string>
+        <string name="categories">Categories</string>
+        <string name="search_wallpapers">Search Wallpaper</string>
+        <string name="wallpaper">Wallpaper</string>
+        <string name="download">Download</string>
+        <string name="set_wallpaper_home">Set home screen</string>
+        <string name="set_wallpaper_lockscreen">Set lock screen</string>
+        <string name="set_wallpaper_both_screen">Set booth screens</string>
+        <string name="home">Home</string>
+        <string name="search">Search</string>
+        <string name="favorites">Favorites</string>
+        <string name="search_wallpaper">Search Wallpaper</string>
+        <string name="not_available_for_build_version_n">This service is currently not available for your device.</string>
+        <string name="save_image_success">Save image success</string>
+        <string name="save_image_error">Save image error</string>
+        <string name="favorite_image_success">Success when favorite image</string>
+        <string name="favorite_image_error">Error when favorite image</string>
+        <string name="remove_favorite">Removed successfully</string>
+        <string name="set_image_background_success">Set image success</string>
+</resources>

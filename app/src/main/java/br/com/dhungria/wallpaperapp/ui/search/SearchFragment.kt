@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -56,12 +57,14 @@ class SearchFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         val menuitem = binding.toolbarSearchFragment.menu.findItem(R.id.action_search)
-        val search = menuitem.actionView as SearchView
-        search.clearFocus()
-        search.onActionViewCollapsed()
-        val toolbar = binding.toolbarSearchFragment.menu
-        toolbar.close()
-        toolbar.clear()
+        if (menuitem!=null){
+            val search = menuitem.actionView as SearchView
+            search.clearFocus()
+            search.onActionViewCollapsed()
+//            val toolbar = binding.toolbarSearchFragment.menu
+//            toolbar.close()
+//            toolbar.clear()
+        }
     }
 
 

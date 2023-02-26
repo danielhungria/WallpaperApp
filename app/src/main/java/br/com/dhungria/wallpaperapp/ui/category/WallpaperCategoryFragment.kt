@@ -59,7 +59,7 @@ class WallpaperCategoryFragment : Fragment() {
     }
 
     private fun setupToolbarTitle() = with(binding.toolbarCategoryFragment) {
-        title = category?.name ?: "Category"
+        title = category?.name ?: context.getString(R.string.category)
         setNavigationOnClickListener {
             findNavController().popBackStack()
         }

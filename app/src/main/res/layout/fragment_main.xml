@@ -31,7 +31,7 @@
                     android:id="@+id/toolbar_main_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:title="Wallpaper"
+                    app:title="@string/wallpaper"
                     app:titleCentered="true" />
 
             </com.google.android.material.appbar.AppBarLayout>
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:text="Popular Wallpapers"
+                android:text="@string/popular_wallpapers"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:text="Categories"
+                android:text="@string/categories"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"

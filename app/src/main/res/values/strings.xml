@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">WallPaper App</string>
+    <string name="category">Categoria</string>
+    <string name="popular_wallpapers">Populares</string>
+    <string name="categories">Categorias</string>
+    <string name="search_wallpapers">Buscar papéis de parede</string>
+    <string name="wallpaper">Papel de Parede</string>
+    <string name="download">Baixar</string>
+    <string name="set_wallpaper_home">Definir para tela principal</string>
+    <string name="set_wallpaper_lockscreen">Definir para tela de bloqueio</string>
+    <string name="set_wallpaper_both_screen">Definir para ambas as telas</string>
+    <string name="home">Principal</string>
+    <string name="search">Buscar</string>
+    <string name="favorites">Favoritos</string>
+    <string name="search_wallpaper">Buscar papel de parede</string>
+    <string name="not_available_for_build_version_n">no momento esse serviço não está disponível para o seu dispositivo</string>
+    <string name="save_image_success">Imagem salva com sucesso</string>
+    <string name="save_image_error">Erro ao salvar imagem</string>
+    <string name="favorite_image_success">Favoritado com Sucesso!</string>
+    <string name="favorite_image_error">Erro ao favoritar imagem</string>
+    <string name="remove_favorite">Removido com sucesso!</string>
+    <string name="set_image_background_success">Imagem definida com sucesso</string>
 </resources>

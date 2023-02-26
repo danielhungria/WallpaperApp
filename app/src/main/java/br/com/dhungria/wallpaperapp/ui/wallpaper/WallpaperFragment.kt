@@ -108,18 +108,28 @@ class WallpaperFragment : Fragment() {
         val bitmap = binding.imageViewWallpaperFragment.drawToBitmap()
         val wallpaperManager = WallpaperManager.getInstance(context)
         when(screen){
-            "Home" -> { wallpaperManager.setBitmap(bitmap) }
+            "Home" -> {
+                wallpaperManager.setBitmap(bitmap)
+                Toast.makeText(context, getString(R.string.set_image_background_success), Toast.LENGTH_LONG).show()
+            }
             "Both" -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     val flagLock = WallpaperManager.FLAG_LOCK
                     wallpaperManager.setBitmap(bitmap)
                     wallpaperManager.setBitmap(bitmap, null, true, flagLock)
+                    Toast.makeText(context, getString(R.string.set_image_background_success), Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(context, getString(R.string.not_available_for_build_version_n), Toast.LENGTH_LONG).show()
                 }
             }
+            //lockscreen
             else -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     val flagLock = WallpaperManager.FLAG_LOCK
                     wallpaperManager.setBitmap(bitmap, null, true, flagLock)
+                    Toast.makeText(context, getString(R.string.set_image_background_success), Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(context, getString(R.string.not_available_for_build_version_n), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -165,16 +175,16 @@ class WallpaperFragment : Fragment() {
             }
             val contentValues = ContentValues()
             val resolver = context?.contentResolver
-            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "Image_" + ".jpg")
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, "WallpaperApp_" + ".jpg")
             contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/*")
             val imageUri = resolver?.insert(uri, contentValues)
             outputStream = resolver?.openOutputStream(Objects.requireNonNull(imageUri)!!)!!
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
             Objects.requireNonNull(outputStream)
-            Toast.makeText(context, "Imagem salva com sucesso", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, getString(R.string.save_image_success), Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
             Log.e("error", "onViewCreated: $e")
-            Toast.makeText(context, "Erro ao salvar imagem", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, getString(R.string.save_image_error), Toast.LENGTH_LONG).show()
         }
     }
 

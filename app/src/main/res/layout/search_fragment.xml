@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:menu="@menu/menu_fragment_search"
-                    app:title="Search Wallpapers"
+                    app:title="@string/search_wallpapers"
                     app:titleCentered="true"
                     style="@style/CustomToolbar"
                     />
