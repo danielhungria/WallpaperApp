@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import br.com.dhungria.wallpaperapp.R
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import br.com.dhungria.wallpaperapp.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,11 +38,11 @@ class AdminViewModel @Inject constructor(
             if (name.isNotBlank() && fileName.isNotBlank() && image.isNotBlank() && category.isNotBlank()) {
                 repository.uploadWallpaper(saveWallpaperModel, uuid)
                 context?.let {
-                    Toast.makeText(it, "Success", Toast.LENGTH_LONG).show()
+                    Toast.makeText(it, context.getString(R.string.success), Toast.LENGTH_LONG).show()
                 }
             }else{
                 context?.let {
-                    Toast.makeText(it, "Error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(it, context.getString(R.string.error), Toast.LENGTH_LONG).show()
                 }
             }
         } catch (e: Exception) {

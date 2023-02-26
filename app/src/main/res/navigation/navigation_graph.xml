@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_fragment_main_to_search_fragment"
             app:destination="@+id/search_fragment" />
+        <action
+            android:id="@+id/action_fragment_main_to_support_fragment"
+            app:destination="@id/support_fragment"/>
     </fragment>
 
     <fragment
@@ -68,5 +71,11 @@
         android:name="br.com.dhungria.wallpaperapp.ui.admin.AdminScreenFragment"
         android:label="admin_screen_fragment"
         tools:layout="@layout/admin_screen_fragment"/>
+
+    <fragment
+        android:id="@+id/support_fragment"
+        android:name="br.com.dhungria.wallpaperapp.ui.support.SupportFragment"
+        tools:layout="@layout/support_fragment"
+        android:label="support_fragment"/>
 
 </navigation>

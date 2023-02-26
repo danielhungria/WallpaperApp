@@ -21,4 +21,11 @@
         <string name="favorite_image_error">Error when favorite image</string>
         <string name="remove_favorite">Removed successfully</string>
         <string name="set_image_background_success">Set image success</string>
+        <string name="success_save">Success when save wallpaper</string>
+        <string name="error_save">Error when save wallpaper</string>
+        <string name="support">Support</string>
+        <string name="success">Success</string>
+        <string name="error">Error</string>
+        <string name="fill_in_all_fields">fill in all fields</string>
+        <string name="service_unavailable">service currently unavailable</string>
 </resources>

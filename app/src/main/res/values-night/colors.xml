@@ -9,5 +9,6 @@
     <color name="white">#151515</color>
     <color name="Transparent">#00000000</color>
     <color name="text_color_white_forever">#EEEEEE</color>
+    <color name="top_bar_color">#1A1025</color>
 
 </resources>
