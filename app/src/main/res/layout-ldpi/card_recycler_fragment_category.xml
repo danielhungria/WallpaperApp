@@ -6,7 +6,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view_recycler_fragment_category"
-        android:layout_width="130dp"
+        android:layout_width="80dp"
         android:layout_height="220dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

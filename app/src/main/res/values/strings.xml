@@ -20,4 +20,6 @@
     <string name="favorite_image_error">Erro ao favoritar imagem</string>
     <string name="remove_favorite">Removido com sucesso!</string>
     <string name="set_image_background_success">Imagem definida com sucesso</string>
+    <string name="success_save">Success when save wallpaper</string>
+    <string name="error_save">Error when save wallpaper</string>
 </resources>

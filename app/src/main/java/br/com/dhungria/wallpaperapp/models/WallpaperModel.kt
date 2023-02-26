@@ -13,6 +13,7 @@ data class WallpaperModel(
     val idDB: Int = 0,
     val id: String = "",
     val name: String = "",
+    val fileName: String = "",
     val image: String = "",
     val category: String = "",
     val popular: Boolean = false,
