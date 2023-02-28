@@ -27,4 +27,9 @@
     <string name="error">Erro</string>
     <string name="fill_in_all_fields">Preencha todos os campos</string>
     <string name="service_unavailable">Serviço indisponível no momento</string>
+    <string name="my_favorites">Meus favoritos</string>
+    <string name="insert_your_feedback_suggestion_or_bug_relate">Insira seu feedback, relato de bug ou sugestão</string>
+    <string name="insert_title">Insira o título</string>
+    <string name="insert_your_text">Insira o texto</string>
+    <string name="send">Enviar</string>
 </resources>

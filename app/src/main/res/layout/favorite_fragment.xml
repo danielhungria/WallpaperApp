@@ -29,7 +29,7 @@
                     android:id="@+id/toolbar_favorite_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:title="My Favorites"
+                    app:title="@string/my_favorites"
                     app:titleCentered="true" />
 
             </com.google.android.material.appbar.AppBarLayout>

@@ -28,4 +28,9 @@
         <string name="error">Error</string>
         <string name="fill_in_all_fields">fill in all fields</string>
         <string name="service_unavailable">service currently unavailable</string>
+        <string name="my_favorites">My Favorites</string>
+        <string name="insert_your_feedback_suggestion_or_bug_relate">Insert your feedback, suggestion or bug relate</string>
+        <string name="insert_title">Insert title</string>
+        <string name="insert_your_text">Insert your text</string>
+        <string name="send">Send</string>
 </resources>
