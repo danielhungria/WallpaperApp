@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WallPaper App</string>
+    <string name="app_name">WallPaper - Epic Images</string>
     <string name="category">Categoria</string>
     <string name="popular_wallpapers">Populares</string>
     <string name="categories">Categorias</string>
@@ -32,4 +32,13 @@
     <string name="insert_title">Insira o título</string>
     <string name="insert_your_text">Insira o texto</string>
     <string name="send">Enviar</string>
+    <string name="ad_id_test" translatable="false">ca-app-pub-1398509773631594/5315716299</string>
+    <string name="ad_id_main" translatable="false">ca-app-pub-1398509773631594/5315716299</string>
+    <string name="ad_interstitial" translatable="false">ca-app-pub-1398509773631594~2466191675</string>
+    <string name="splash_name" translatable="false">WallPaper Epic Images</string>
+    <!--   test - ca-app-pub-3940256099942544/6300978111-->
+    <!--    main ca-app-pub-1398509773631594/5315716299-->
+    <!--    ad interstitial ca-app-pub-1398509773631594~2466191675-->
+<!--    ad interstitial test ca-app-pub-3940256099942544/1033173712-->
+
 </resources>

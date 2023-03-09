@@ -27,6 +27,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.view.drawToBitmap
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import java.io.OutputStream
 import java.lang.Exception
 import java.util.Objects
@@ -35,6 +39,7 @@ import java.util.Objects
 class WallpaperFragment : Fragment() {
 
     private lateinit var binding: WallpaperLayoutFragmentBinding
+    private var mInterstitialAd: InterstitialAd? = null
     private val wallpaperModel by lazy { arguments?.getParcelable<WallpaperModel>("IMAGE_TO_SHOW") }
     private val viewModel: WallpaperViewModel by viewModels()
 
@@ -63,6 +68,26 @@ class WallpaperFragment : Fragment() {
         }
         viewModel.fetchWallpaper()
 
+    }
+
+    private fun setupAdInterstitial(adRequest: AdRequest) {
+        InterstitialAd.load(
+            requireContext(),
+            getString(R.string.ad_interstitial),
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    adError.toString().let { Log.d("Fragment", it) }
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    Log.d("Fragment", "Ad was loaded.")
+                    mInterstitialAd = interstitialAd
+                    mInterstitialAd?.show(requireActivity())
+                }
+            }
+        )
     }
 
     private fun setupButtonSetWallpaper() = with(binding) {
@@ -111,6 +136,8 @@ class WallpaperFragment : Fragment() {
             "Home" -> {
                 wallpaperManager.setBitmap(bitmap)
                 Toast.makeText(context, getString(R.string.set_image_background_success), Toast.LENGTH_LONG).show()
+                val adRequest = AdRequest.Builder().build()
+                setupAdInterstitial(adRequest)
             }
             "Both" -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -118,6 +145,8 @@ class WallpaperFragment : Fragment() {
                     wallpaperManager.setBitmap(bitmap)
                     wallpaperManager.setBitmap(bitmap, null, true, flagLock)
                     Toast.makeText(context, getString(R.string.set_image_background_success), Toast.LENGTH_LONG).show()
+                    val adRequest = AdRequest.Builder().build()
+                    setupAdInterstitial(adRequest)
                 }else{
                     Toast.makeText(context, getString(R.string.not_available_for_build_version_n), Toast.LENGTH_LONG).show()
                 }
@@ -128,6 +157,8 @@ class WallpaperFragment : Fragment() {
                     val flagLock = WallpaperManager.FLAG_LOCK
                     wallpaperManager.setBitmap(bitmap, null, true, flagLock)
                     Toast.makeText(context, getString(R.string.set_image_background_success), Toast.LENGTH_LONG).show()
+                    val adRequest = AdRequest.Builder().build()
+                    setupAdInterstitial(adRequest)
                 }else{
                     Toast.makeText(context, getString(R.string.not_available_for_build_version_n), Toast.LENGTH_LONG).show()
                 }
@@ -182,6 +213,8 @@ class WallpaperFragment : Fragment() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
             Objects.requireNonNull(outputStream)
             Toast.makeText(context, getString(R.string.save_image_success), Toast.LENGTH_LONG).show()
+            val adRequest = AdRequest.Builder().build()
+            setupAdInterstitial(adRequest)
         } catch (e: Exception) {
             Log.e("error", "onViewCreated: $e")
             Toast.makeText(context, getString(R.string.save_image_error), Toast.LENGTH_LONG).show()
