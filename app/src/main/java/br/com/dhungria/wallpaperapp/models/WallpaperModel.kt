@@ -4,7 +4,6 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import java.util.UUID
 
 @Entity(tableName = "wallpaper_table")
 @Parcelize
@@ -13,6 +12,7 @@ data class WallpaperModel(
     val idDB: Int = 0,
     val id: String = "",
     val name: String = "",
+    val fileName: String = "",
     val image: String = "",
     val category: String = "",
     val popular: Boolean = false,

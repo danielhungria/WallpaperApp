@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,12 +18,15 @@ import br.com.dhungria.wallpaperapp.R
 import br.com.dhungria.wallpaperapp.adapter.SearchAdapter
 import br.com.dhungria.wallpaperapp.databinding.SearchFragmentBinding
 import br.com.dhungria.wallpaperapp.viewmodel.SearchViewModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding: SearchFragmentBinding
+    private lateinit var mAdView: AdView
     private val searchAdapter = SearchAdapter(onClick = {
         findNavController().navigate(
             R.id.action_search_fragment_to_fragment_wallpaper,
@@ -45,6 +49,7 @@ class SearchFragment : Fragment() {
         setupNavigatePopBackStack()
         setupRecyclerSearch()
         setupToolbarClick()
+        setupBannerAd()
         viewModel.queryAllWallpaper()
         viewModel.wallpaperModel.observe(viewLifecycleOwner) {
             setupButtonDeleteTag()
@@ -53,17 +58,13 @@ class SearchFragment : Fragment() {
         }
 
     }
-    override fun onPause() {
-        super.onPause()
-        val menuitem = binding.toolbarSearchFragment.menu.findItem(R.id.action_search)
-        val search = menuitem.actionView as SearchView
-        search.clearFocus()
-        search.onActionViewCollapsed()
-        val toolbar = binding.toolbarSearchFragment.menu
-        toolbar.close()
-        toolbar.clear()
-    }
 
+    private fun setupBannerAd() {
+        binding.adViewBannerSearchFragment.visibility = View.VISIBLE
+        mAdView = binding.adViewBannerSearchFragment
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+    }
 
     private fun setupButtonDeleteTag() {
         binding.buttonCardViewDeleteTagSearchFragment.setOnClickListener {
@@ -78,9 +79,11 @@ class SearchFragment : Fragment() {
         if (viewModel.newText.isNotBlank()) {
             searchAdapter.filter.filter(viewModel.newText)
             binding.textViewCardViewTagSearchFragment.text = viewModel.newText
+            binding.cardViewTagSearchFragment.visibility = View.VISIBLE
         } else if (viewModel.query.isNotBlank()) {
             searchAdapter.filter.filter(viewModel.query)
             binding.textViewCardViewTagSearchFragment.text = viewModel.query
+            binding.cardViewTagSearchFragment.visibility = View.VISIBLE
         }else{
             binding.cardViewTagSearchFragment.visibility = View.GONE
         }

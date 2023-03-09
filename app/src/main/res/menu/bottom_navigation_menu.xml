@@ -4,29 +4,29 @@
     <item
         android:id="@+id/fragment_main"
         android:enabled="true"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/baseline_home_24"
         />
 
     <item
         android:id="@+id/search_fragment"
         android:enabled="true"
-        android:title="Search"
+        android:title="@string/search"
         android:icon="@drawable/baseline_search_24"
         />
 
     <item
         android:id="@+id/favorite_fragment"
         android:enabled="true"
-        android:title="Favorites"
+        android:title="@string/favorites"
         android:icon="@drawable/ic_baseline_favorite_24"
         />
 
-<!--    <item-->
-<!--        android:id="@+id/fragment_category"-->
-<!--        android:enabled="false"-->
-<!--        android:title="Category"-->
-<!--        android:icon="@drawable/baseline_category_24"-->
-<!--        />-->
+    <item
+        android:id="@+id/support_fragment"
+        android:enabled="true"
+        android:title="@string/support"
+        android:icon="@drawable/baseline_contact_support_24"
+        />
 
 </menu>

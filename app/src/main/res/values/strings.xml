@@ -1,3 +1,44 @@
 <resources>
-    <string name="app_name">WallPaper App</string>
+    <string name="app_name">WallPaper - Epic Images</string>
+    <string name="category">Categoria</string>
+    <string name="popular_wallpapers">Populares</string>
+    <string name="categories">Categorias</string>
+    <string name="search_wallpapers">Buscar papéis de parede</string>
+    <string name="wallpaper">Papel de Parede</string>
+    <string name="download">Baixar</string>
+    <string name="set_wallpaper_home">Definir para tela principal</string>
+    <string name="set_wallpaper_lockscreen">Definir para tela de bloqueio</string>
+    <string name="set_wallpaper_both_screen">Definir para ambas as telas</string>
+    <string name="home">Principal</string>
+    <string name="search">Buscar</string>
+    <string name="favorites">Favoritos</string>
+    <string name="search_wallpaper">Buscar papel de parede</string>
+    <string name="not_available_for_build_version_n">no momento esse serviço não está disponível para o seu dispositivo</string>
+    <string name="save_image_success">Imagem salva com sucesso</string>
+    <string name="save_image_error">Erro ao salvar imagem</string>
+    <string name="favorite_image_success">Favoritado com Sucesso!</string>
+    <string name="favorite_image_error">Erro ao favoritar imagem</string>
+    <string name="remove_favorite">Removido com sucesso!</string>
+    <string name="set_image_background_success">Imagem definida com sucesso</string>
+    <string name="success_save">Sucesso ao salvar</string>
+    <string name="error_save">Error when save wallpaper</string>
+    <string name="support">Suporte</string>
+    <string name="success">Sucesso!</string>
+    <string name="error">Erro</string>
+    <string name="fill_in_all_fields">Preencha todos os campos</string>
+    <string name="service_unavailable">Serviço indisponível no momento</string>
+    <string name="my_favorites">Meus favoritos</string>
+    <string name="insert_your_feedback_suggestion_or_bug_relate">Insira seu feedback, relato de bug ou sugestão</string>
+    <string name="insert_title">Insira o título</string>
+    <string name="insert_your_text">Insira o texto</string>
+    <string name="send">Enviar</string>
+    <string name="ad_id_test" translatable="false">ca-app-pub-1398509773631594/5315716299</string>
+    <string name="ad_id_main" translatable="false">ca-app-pub-1398509773631594/5315716299</string>
+    <string name="ad_interstitial" translatable="false">ca-app-pub-1398509773631594~2466191675</string>
+    <string name="splash_name" translatable="false">WallPaper Epic Images</string>
+    <!--   test - ca-app-pub-3940256099942544/6300978111-->
+    <!--    main ca-app-pub-1398509773631594/5315716299-->
+    <!--    ad interstitial ca-app-pub-1398509773631594~2466191675-->
+<!--    ad interstitial test ca-app-pub-3940256099942544/1033173712-->
+
 </resources>

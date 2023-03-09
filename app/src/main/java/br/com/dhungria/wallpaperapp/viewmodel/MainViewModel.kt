@@ -30,8 +30,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-
-    private fun loadCategoryData() {
+    fun loadCategoryData() {
         viewModelScope.launch {
             firebaseRepository.queryCategory().addOnCompleteListener {
                 if (it.isSuccessful && !it.result.isEmpty) {
@@ -51,10 +50,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
-
     fun getCategoryList(): LiveData<List<CategoryModel>> {
         return categoryList
     }
-
 
 }

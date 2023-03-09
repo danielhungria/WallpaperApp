@@ -1,6 +1,10 @@
 package br.com.dhungria.wallpaperapp.viewmodel
 
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import br.com.dhungria.wallpaperapp.R
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import br.com.dhungria.wallpaperapp.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,22 +17,37 @@ class AdminViewModel @Inject constructor(
     ): ViewModel() {
 
 
-
     fun uploadWallpaper(
         name: String,
+        fileName: String,
         image: String,
         category: String,
-        popular: Boolean
-    ){
-        val uuid = UUID.randomUUID().toString()
-        val saveWallpaperModel = WallpaperModel(
-            id = uuid,
-            name = name,
-            image = image,
-            category = category,
-            popular = popular
-        )
-        repository.uploadWallpaper(saveWallpaperModel, uuid)
+        popular: Boolean,
+        context: Context?
+    ) {
+        try {
+            val uuid = UUID.randomUUID().toString()
+            val saveWallpaperModel = WallpaperModel(
+                id = uuid,
+                name = name,
+                fileName = fileName,
+                image = image,
+                category = category,
+                popular = popular
+            )
+            if (name.isNotBlank() && fileName.isNotBlank() && image.isNotBlank() && category.isNotBlank()) {
+                repository.uploadWallpaper(saveWallpaperModel, uuid)
+                context?.let {
+                    Toast.makeText(it, context.getString(R.string.success), Toast.LENGTH_LONG).show()
+                }
+            }else{
+                context?.let {
+                    Toast.makeText(it, context.getString(R.string.error), Toast.LENGTH_LONG).show()
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("AdminViewModel", "uploadWallpaper: $e")
+        }
     }
 
 }

@@ -14,12 +14,15 @@ import br.com.dhungria.wallpaperapp.adapter.WallpaperCategoriesAdapter
 import br.com.dhungria.wallpaperapp.databinding.FragmentCategoryBinding
 import br.com.dhungria.wallpaperapp.models.CategoryModel
 import br.com.dhungria.wallpaperapp.viewmodel.WallpaperCategoryViewModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WallpaperCategoryFragment : Fragment() {
 
     private val viewModel: WallpaperCategoryViewModel by viewModels()
+    private lateinit var mAdView: AdView
     private val wallpaperCategoryAdapter = WallpaperCategoriesAdapter(onClick = {
         findNavController().navigate(
             R.id.action_wallpaper_category_to_fragment_wallpaper_category,
@@ -36,6 +39,7 @@ class WallpaperCategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViewCategory()
         setupToolbarTitle()
+        setupBannerAd()
         viewModel.value = category?.name ?: ""
         viewModel.getWallpaperListFiltered().observe(viewLifecycleOwner) {
             wallpaperCategoryAdapter.updateList(it)
@@ -50,6 +54,13 @@ class WallpaperCategoryFragment : Fragment() {
         return binding.root
     }
 
+    private fun setupBannerAd() {
+        binding.adViewBannerCategoryFragment.visibility = View.VISIBLE
+        mAdView = binding.adViewBannerCategoryFragment
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+    }
+
     private fun setupRecyclerViewCategory() {
         binding.recyclerviewCategoriesFragmentCategory.apply {
             adapter = wallpaperCategoryAdapter
@@ -59,7 +70,7 @@ class WallpaperCategoryFragment : Fragment() {
     }
 
     private fun setupToolbarTitle() = with(binding.toolbarCategoryFragment) {
-        title = category?.name ?: "Category"
+        title = category?.name ?: context.getString(R.string.category)
         setNavigationOnClickListener {
             findNavController().popBackStack()
         }

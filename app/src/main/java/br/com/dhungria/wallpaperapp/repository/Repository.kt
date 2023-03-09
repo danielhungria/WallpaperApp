@@ -1,6 +1,7 @@
 package br.com.dhungria.wallpaperapp.repository
 
 import br.com.dhungria.wallpaperapp.data.dao.WallpaperDao
+import br.com.dhungria.wallpaperapp.models.SupportModel
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
@@ -35,11 +36,24 @@ class Repository @Inject constructor(private val wallpaperDao: WallpaperDao) {
             .get()
     }
 
+    fun querySupportService(): Task<QuerySnapshot>{
+        return firebaseFireStore
+            .collection("supportService")
+            .get()
+    }
+
     fun uploadWallpaper(wallpaperModel: WallpaperModel, uuid: String) {
         Firebase.firestore
             .collection("wallpaper")
             .document(uuid)
             .set(wallpaperModel)
+    }
+
+    fun uploadSupport(supportModel: SupportModel, uuid: String){
+        Firebase.firestore
+            .collection("support")
+            .document(uuid)
+            .set(supportModel)
     }
 
     fun getAll() = wallpaperDao.getAll()

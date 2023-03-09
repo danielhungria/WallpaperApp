@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.dhungria.wallpaperapp.R
 import br.com.dhungria.wallpaperapp.models.WallpaperModel
 import br.com.dhungria.wallpaperapp.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -51,9 +51,8 @@ class WallpaperViewModel @Inject constructor(
             )
             if (!repository.verifyWasFavorite(id)) {
                 repository.insert(wallpaperToSave)
-                Toast.makeText(context, "Favoritado com Sucesso!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.favorite_image_success), Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
@@ -65,6 +64,6 @@ class WallpaperViewModel @Inject constructor(
         viewModelScope.launch {
             repository.delete(id)
         }
-        Toast.makeText(context, "Deleted", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, context.getString(R.string.remove_favorite), Toast.LENGTH_LONG).show()
     }
 }
