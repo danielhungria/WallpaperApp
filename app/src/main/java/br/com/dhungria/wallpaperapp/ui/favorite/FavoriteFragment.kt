@@ -1,6 +1,7 @@
 package br.com.dhungria.wallpaperapp.ui.favorite
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,9 @@ import br.com.dhungria.wallpaperapp.databinding.FavoriteFragmentBinding
 import br.com.dhungria.wallpaperapp.viewmodel.FavoriteViewModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +27,7 @@ class FavoriteFragment : Fragment() {
 
     private val viewModel: FavoriteViewModel by viewModels()
     private lateinit var mAdView: AdView
+    private var mInterstitialAd: InterstitialAd? = null
     private val favoriteAdapter = FavoriteAdapter(onClick = {
         findNavController().navigate(
             R.id.action_favorite_fragment_to_fragment_wallpaper_category,
@@ -36,6 +41,8 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerFavorite()
         setupBannerAd()
+        setupAdInterstitial()
+        viewModel.adLoad++
         viewModel.wallpaperModel.observe(viewLifecycleOwner){
             favoriteAdapter.updateList(it)
         }
@@ -62,5 +69,30 @@ class FavoriteFragment : Fragment() {
         mAdView = binding.adViewBannerFavoriteFragment
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+    }
+
+    private fun setupAdInterstitial() {
+        if (viewModel.adLoad>=2){
+            val adRequest = AdRequest.Builder().build()
+            InterstitialAd.load(
+                requireContext(),
+                getString(R.string.ad_interstitial2),
+                adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        adError.toString().let { Log.d("Fragment", it) }
+                        mInterstitialAd = null
+                    }
+
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        Log.d("Fragment", "Ad was loaded.")
+                        mInterstitialAd = interstitialAd
+                        mInterstitialAd?.show(requireActivity())
+                        viewModel.adLoad=0
+                    }
+                }
+            )
+        }
+
     }
 }

@@ -61,12 +61,39 @@ class WallpaperFragment : Fragment() {
         setupButtonExpanded()
         setupButtonSetWallpaper()
         checkStateButtons()
+        setupAdInterstitial2()
+        viewModel.adLoad++
         wallpaperModel?.let { wallpaperModel ->
             setupImageView(wallpaperModel)
             setupFavoriteButton(wallpaperModel)
             setupFavoriteBackgroundButton(wallpaperModel)
         }
         viewModel.fetchWallpaper()
+
+    }
+
+    private fun setupAdInterstitial2() {
+        if (viewModel.adLoad>=2){
+            val adRequest = AdRequest.Builder().build()
+            InterstitialAd.load(
+                requireContext(),
+                getString(R.string.ad_interstitial2),
+                adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        adError.toString().let { Log.d("Fragment", it) }
+                        mInterstitialAd = null
+                    }
+
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        Log.d("Fragment", "Ad was loaded.")
+                        mInterstitialAd = interstitialAd
+                        mInterstitialAd?.show(requireActivity())
+                        viewModel.adLoad=0
+                    }
+                }
+            )
+        }
 
     }
 

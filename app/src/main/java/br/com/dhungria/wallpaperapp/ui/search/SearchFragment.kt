@@ -20,6 +20,9 @@ import br.com.dhungria.wallpaperapp.databinding.SearchFragmentBinding
 import br.com.dhungria.wallpaperapp.viewmodel.SearchViewModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +30,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var binding: SearchFragmentBinding
     private lateinit var mAdView: AdView
+    private var mInterstitialAd: InterstitialAd? = null
     private val searchAdapter = SearchAdapter(onClick = {
         findNavController().navigate(
             R.id.action_search_fragment_to_fragment_wallpaper,
@@ -50,7 +54,9 @@ class SearchFragment : Fragment() {
         setupRecyclerSearch()
         setupToolbarClick()
         setupBannerAd()
+        setupAdInterstitial()
         viewModel.queryAllWallpaper()
+        viewModel.adLoad++
         viewModel.wallpaperModel.observe(viewLifecycleOwner) {
             setupButtonDeleteTag()
             recoverySearch()
@@ -64,6 +70,31 @@ class SearchFragment : Fragment() {
         mAdView = binding.adViewBannerSearchFragment
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+    }
+
+    private fun setupAdInterstitial() {
+        if (viewModel.adLoad>=2){
+            val adRequest = AdRequest.Builder().build()
+            InterstitialAd.load(
+                requireContext(),
+                getString(R.string.ad_interstitial2),
+                adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        adError.toString().let { Log.d("Fragment", it) }
+                        mInterstitialAd = null
+                    }
+
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        Log.d("Fragment", "Ad was loaded.")
+                        mInterstitialAd = interstitialAd
+                        mInterstitialAd?.show(requireActivity())
+                        viewModel.adLoad=0
+                    }
+                }
+            )
+        }
+
     }
 
     private fun setupButtonDeleteTag() {

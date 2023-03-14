@@ -16,6 +16,7 @@ class SearchViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
+    var adLoad: Int = 0
     var query = ""
     var newText = ""
 

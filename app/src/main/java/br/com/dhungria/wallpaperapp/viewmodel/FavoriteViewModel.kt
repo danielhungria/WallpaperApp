@@ -18,6 +18,8 @@ class FavoriteViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
+    var adLoad: Int = 0
+
     private val _wallpaperModel = MutableLiveData<List<WallpaperModel>>()
     val wallpaperModel: LiveData<List<WallpaperModel>>
         get() = _wallpaperModel

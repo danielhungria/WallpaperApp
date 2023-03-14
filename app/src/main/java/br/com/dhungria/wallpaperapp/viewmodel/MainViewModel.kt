@@ -18,6 +18,7 @@ class MainViewModel @Inject constructor(
 
     private var field: String = "popular"
     var value: Boolean = true
+    var adLoad: Int = 0
 
     private val _wallpaperModel = MutableLiveData<List<WallpaperModel>>()
     val wallpaperModel: LiveData<List<WallpaperModel>>

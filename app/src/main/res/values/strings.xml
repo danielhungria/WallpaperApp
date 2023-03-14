@@ -34,7 +34,8 @@
     <string name="send">Enviar</string>
     <string name="ad_id_test" translatable="false">ca-app-pub-1398509773631594/5315716299</string>
     <string name="ad_id_main" translatable="false">ca-app-pub-1398509773631594/5315716299</string>
-    <string name="ad_interstitial" translatable="false">ca-app-pub-1398509773631594~2466191675</string>
+    <string name="ad_interstitial" translatable="false">ca-app-pub-1398509773631594/2702011304</string>
+    <string name="ad_interstitial2" translatable="false">ca-app-pub-1398509773631594/4515039438</string>
     <string name="splash_name" translatable="false">WallPaper Epic Images</string>
     <!--   test - ca-app-pub-3940256099942544/6300978111-->
     <!--    main ca-app-pub-1398509773631594/5315716299-->

@@ -15,6 +15,7 @@ class SupportViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
+    var adLoad: Int = 0
     fun uploadSupport(
         title: String,
         text: String,

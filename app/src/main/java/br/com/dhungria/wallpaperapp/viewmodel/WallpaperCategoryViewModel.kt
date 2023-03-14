@@ -16,6 +16,7 @@ class WallpaperCategoryViewModel @Inject constructor(
     private val firebaseRepository: Repository
 ) : ViewModel() {
 
+    var adLoad: Int = 0
     private var field: String = "category"
     var value: Any = ""
 

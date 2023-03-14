@@ -1,6 +1,7 @@
 package br.com.dhungria.wallpaperapp.ui.category
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,9 @@ import br.com.dhungria.wallpaperapp.models.CategoryModel
 import br.com.dhungria.wallpaperapp.viewmodel.WallpaperCategoryViewModel
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +27,7 @@ class WallpaperCategoryFragment : Fragment() {
 
     private val viewModel: WallpaperCategoryViewModel by viewModels()
     private lateinit var mAdView: AdView
+    private var mInterstitialAd: InterstitialAd? = null
     private val wallpaperCategoryAdapter = WallpaperCategoriesAdapter(onClick = {
         findNavController().navigate(
             R.id.action_wallpaper_category_to_fragment_wallpaper_category,
@@ -40,6 +45,8 @@ class WallpaperCategoryFragment : Fragment() {
         setupRecyclerViewCategory()
         setupToolbarTitle()
         setupBannerAd()
+        setupAdInterstitial()
+        viewModel.adLoad++
         viewModel.value = category?.name ?: ""
         viewModel.getWallpaperListFiltered().observe(viewLifecycleOwner) {
             wallpaperCategoryAdapter.updateList(it)
@@ -59,6 +66,31 @@ class WallpaperCategoryFragment : Fragment() {
         mAdView = binding.adViewBannerCategoryFragment
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+    }
+
+    private fun setupAdInterstitial() {
+        if (viewModel.adLoad>=2){
+            val adRequest = AdRequest.Builder().build()
+            InterstitialAd.load(
+                requireContext(),
+                getString(R.string.ad_interstitial2),
+                adRequest,
+                object : InterstitialAdLoadCallback() {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        adError.toString().let { Log.d("Fragment", it) }
+                        mInterstitialAd = null
+                    }
+
+                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                        Log.d("Fragment", "Ad was loaded.")
+                        mInterstitialAd = interstitialAd
+                        mInterstitialAd?.show(requireActivity())
+                        viewModel.adLoad=0
+                    }
+                }
+            )
+        }
+
     }
 
     private fun setupRecyclerViewCategory() {

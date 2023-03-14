@@ -18,6 +18,7 @@ class WallpaperViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
+    var adLoad: Int = 0
     var hideElements: Boolean = false
     var buttonExpanded: Boolean = false
 
